@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width">
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/cropper/dist/cropper.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -57,29 +58,32 @@
     </noscript>
 
 
-    <div class="container">
-      <header class="header wrapper">
+    <div class="container wrapper">
+      <header class="header">
         <h1>Repeating background image cropper</h1>
       </header>
-      <main class="main wrapper">
-        <div style="font-family:monospace">
-          x: <input type="text" id="sx" size="2" value="100" /> 
-          y: <input type="text" id="sy" size="2" value="200" /></br/>
-          w: <input type="text" id="sw" size="2" value="200" /> 
-          h: <input type="text" id="sh" size="2" value="300" /><br/>
-          <br /><br />
+      <main class="main">
+        <div class="canvasCrop">
           <input type="file" id="fileinput" /><br/>
-          <canvas id="canvas" width="200" height="200"></canvas>
-          <br /><br />
+          <br />
+          x: <input type="number" id="sx" size="2" value="100" /> 
+          y: <input type="number" id="sy" size="2" value="200" /></br/>
+          w: <input type="number" id="sw" size="2" value="200" /> 
+          h: <input type="number" id="sh" size="2" value="300" /><br/>
           <p id="output"></p>
-          <br /><br />
+          <canvas id="canvas" width="200" height="200"></canvas>
         </div>
+
+        <div class="cropper">
+          <img src="images/window.jpg" alt="Picture">
+        </div>
+
       </main>
-      <footer class="footer wrapper">
+      <footer class="footer">
       </footer>
     </div>
 
-
+<!-- 
     <div class="social social-likes social-likes_vertical social-likes_notext" data-url="http://nbed_url/" data-title="nbed_socialTitle">
       <a class="facebook" href="#" title="Share link on Facebook">Facebook</a>
       <a class="twitter" href="#" data-via="nbed_twitter" data-title="nbed_tweet" title="Share link on Twitter">Twitter</a>
@@ -88,12 +92,13 @@
       <a class="pinterest" href="#" title="Share image on Pinterest" data-media="http://nbed_url/social/og1200.png">Pinterest</a>
       <a class="embedLink" href="#" title="Embed link on your website"><span class="social-likes__button">Embed</span></a>
     </div>
-
+ -->
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/social-likes/src/social-likes.js"></script>
+    <script src="bower_components/cropper/dist/cropper.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
