@@ -47,8 +47,6 @@
     <meta property="og:image:height" content="630">
     <meta property="og:url" content="http://nbed_url/">
     <meta property="og:description" content="nbed_socialDesc">
-
-    <meta name="linkstant" content="10500108">
   </head>
   <body>
     <!--[if lt IE 8]>
@@ -60,23 +58,25 @@
 
 
     <div class="container">
-      <div class="header wrapper">
-        <h1>nbed_metaTitle</h1>
-      </div>
-      <div class="main wrapper">
-        <p>main</p>
-      </div>
-      <div class="footer wrapper">
-        <p>footer</p>
-      </div>
-    </div>
-
-
-    <div id="embed" style="display:none;">
-      <h5>Love it? Embed it on your website or blog:</h5>
-      <a href="#" class="embedLink closeEmbed">&times;</a>
-      <!-- NBED check client name and png/jpg filetypes: -->
-      <textarea onclick="this.select();">&lt;a href=&quot;http://nbed_url/&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://nbed_url/social/embed.png&quot; border=&quot;0&quot; width=&quot;550&quot; height=&quot;550&quot; /&gt;&lt;/a&gt;&lt;br /&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Click image to open interactive version (via &lt;a href=&quot;http://www.0distilled.co.uk/&quot;&gt;0distilled&lt;/a&gt;).&lt;/span&gt;</textarea>
+      <header class="header wrapper">
+        <h1>Repeating background image cropper</h1>
+      </header>
+      <main class="main wrapper">
+        <div style="font-family:monospace">
+          x: <input type="text" id="sx" size="2" value="100" /> 
+          y: <input type="text" id="sy" size="2" value="200" /></br/>
+          w: <input type="text" id="sw" size="2" value="200" /> 
+          h: <input type="text" id="sh" size="2" value="300" /><br/>
+          <br /><br />
+          <input type="file" id="fileinput" /><br/>
+          <canvas id="canvas" width="200" height="200"></canvas>
+          <br /><br />
+          <p id="output"></p>
+          <br /><br />
+        </div>
+      </main>
+      <footer class="footer wrapper">
+      </footer>
     </div>
 
 
@@ -97,6 +97,10 @@
     <!-- endbower -->
     <!-- endbuild -->
 
+    <!-- build:js({app,.tmp}) scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+
     <!-- NBED: Google Analytics: change UA-XXXXX-X to be your site's ID.
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -107,12 +111,5 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
     -->
-
-
-    <script src="http://www.linkstant.com/linkstant.js" type="text/javascript"></script>
-
-        <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
-</body>
+  </body>
 </html>

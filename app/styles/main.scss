@@ -9,4 +9,11 @@
 body {
 }
 
+input[type="text"] {
+	padding: 5px;
+	width: 180px;
+	border: none;
+	margin-bottom: 0.8em;
+}
+
 @import "social";
