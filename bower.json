@@ -1,0 +1,15 @@
+{
+  "name": "bgrepeater",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.1",
+    "modernizr": "~2.8.2",
+    "respond": "~1.4.2",
+    "social-likes": "~3.0.4"
+  },
+  "overrides": {
+    "social-likes": {
+      "main": "./src/social-likes.js"
+    }
+  }
+}

@@ -1,0 +1,210 @@
+//--- Social icons etc ---//
+
+.closeEmbed {
+    position: absolute;
+    display: block;
+    top: 12px;
+    right: 12px;
+    line-height: $closeSize;
+    width: $closeSize;
+    height: $closeSize;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2em;
+    color: $c_link;
+    &:hover {
+        color: $c_link;
+    }
+}
+
+#embed {
+    width: 100%;
+    height: 190px;
+    left: 0;
+    bottom: -200px;
+    background: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-top: 5px solid #555;
+    position: fixed;
+    text-align: center;
+    z-index: 999999;
+	@media (min-width: $m_medium) {
+        width:600px;
+        height:190px;
+        left:50%;
+        margin-left:-300px;
+    }
+    h5 {
+        font-weight:bold;
+        font-size:22px;
+        margin:15px;
+        color:#333;
+    }
+    textarea {
+        width:90%;
+        border:1px #999 solid;
+        color:#111;
+        font-size:11px;
+        font-family:monospace;
+        border-radius:3px;
+        padding:5px;
+        height:90px;
+        @media (min-width: $m_medium) {
+            width:450px;
+        }
+    }
+}
+
+
+// Social buttons:
+.social {
+    $ds: 30px;
+    $dl: 48px;
+    float: left;
+    @media (min-width: $m_large) {
+        float: none;
+        text-align: center;
+        position: fixed;
+        left: 0;
+        top: 10%;
+    }
+    @media (min-width: $m_large) and (min-height: $m_small) {
+        top: 30%;
+    }
+    a {
+        float: left;
+        height: $ds;
+        margin-right: 10px;
+        line-height: $ds * 1.1;
+        color: #fff;
+        text-shadow: 0 1px 1px rgba(#000,.1);
+        transition: all ease .2s;
+        vertical-align: middle;
+        text-decoration: none;
+        @extend .fontello-icon;
+        @include sansSerif;
+        font-size: 22px;
+        position: relative;
+        &:before {
+            position: relative;
+            z-index: 2;
+        }
+        &:after {
+            content: '';
+            width: $ds;
+            height: $ds;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        // @media (max-width: $m_large) {
+        //     &:hover {
+        //         background: #444; //nbed
+        //     }
+        // }
+        
+        @media (min-width: $m_large) {
+            display: block;
+            float: none;
+            margin: 0;
+            width: $dl;
+            height: auto;
+            padding: 9px 0 7px;
+            line-height: $dl * 0.7;
+            font-size: 26px;
+            &:hover {
+                width: $dl + 15;
+            }
+            &:after {
+                display: none;
+            }
+        }
+    }
+    &.social-likes_visible a {
+    }
+        .facebook, .social-likes__widget_facebook {
+            @extend .icon-facebook;
+            &:after {
+                background-color: $facebook;
+            }
+        }
+        .twitter, .social-likes__widget_twitter {
+            @extend .icon-twitter;
+            &:after {
+                background-color: $twitter;
+            }
+        }
+        .plusone, .social-likes__widget_plusone {
+            @extend .icon-gplus;
+            &:after {
+                background-color: $gplus;
+            }
+            &:before {
+                top: 0.05em;
+            }
+        }
+        .linkedin, .social-likes__widget_linkedin {
+            @extend .icon-linkedin;
+            &:after {
+                background-color: $linkedin;
+            }
+        }
+        .pinterest, .social-likes__widget_pinterest {
+            @extend .icon-pinterest-circled;
+            &:after {
+                background-color: $pinterest;
+            }
+        }
+        .embedLink {
+            @extend .icon-code;
+            &:after {
+                background-color: $embed;
+            }
+            &:before {
+                text-indent: -0.02em;
+                top: -0.05em;
+            }
+        }
+        @media (min-width: $m_large) {
+            .facebook, .social-likes__widget_facebook {
+                background-color: $facebook;
+            }
+            .twitter, .social-likes__widget_twitter {
+                background-color: $twitter;
+            }
+            .plusone, .social-likes__widget_plusone {
+                background-color: $gplus;
+            }
+            .linkedin, .social-likes__widget_linkedin {
+                background-color: $linkedin;
+            }
+            .pinterest, .social-likes__widget_pinterest {
+                background-color: $pinterest;
+            }
+            .embedLink {
+                background-color: $embed;
+            }
+        }
+
+            .social-likes__button {
+                @include visuallyhidden;
+            }
+            
+            .social-likes__counter {
+                float: right;
+                font-size: 13px;
+                line-height: $ds;
+                margin: 1px 12px 1px 5px;
+                @media (min-width: $m_large) {
+                    display: block;
+                    font-size: 12px;
+                    margin: 0;
+                    float: none;
+                    line-height: 1em;
+                }
+                &.social-likes__counter_empty {
+                    display: none;
+                }
+            }
+}
