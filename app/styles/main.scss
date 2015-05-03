@@ -10,20 +10,24 @@ body {
 	padding: 2em 1em 4em;
 }
 .container {
-	@include clearfix;
-	background: rgba(#fff,0.5);
-	padding: 1em 2em;
+	// @include clearfix;
 }
-
-input[type="number"] {
-	padding: 5px;
-	width: 80px;
-	border: none;
-	margin-bottom: 0.8em;
+.topPanel {
+	background: rgba(#fff,0.8);
+	padding: 1em 2em;
+	margin-bottom: 20px;
+}
+.formRow {
+	margin: 0.8em 0;
+	input {
+		padding: 5px;
+		width: 80px;
+		border: none;
+		margin-right: 1em;
+	}
 }
 #canvas {
 	display: none;
-	// border: 4px solid #fff;
 }
 .download {
 	display: inline-block;

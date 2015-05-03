@@ -59,28 +59,24 @@
 
 
     <div class="container wrapper">
-      <header class="header">
-        <h1>Repeating background image cropper</h1>
-      </header>
-      <main class="main">
+      <div class="topPanel">
+        <header>
+          <h1>Repeating background image cropper</h1>
+        </header>
         <div class="canvasCrop">
-          <input type="file" id="fileinput" /><br/>
-          <br />
-          x: <input type="number" id="sx" size="2" value="100" /> 
-          y: <input type="number" id="sy" size="2" value="200" /></br/>
-          w: <input type="number" id="sw" size="2" value="200" /> 
-          h: <input type="number" id="sh" size="2" value="300" /><br/>
-          <p id="output"></p>
-          <canvas id="canvas" width="200" height="200"></canvas>
+          <input type="file" id="fileinput" />
+          <div class="formRow">x: <input type="number" id="sx" size="2" value="" /> 
+          y: <input type="number" id="sy" size="2" value="" /></div>
+          <div class="formRow">width: <input type="number" id="sw" size="2" value="" /> 
+          height: <input type="number" id="sh" size="2" value="" /></div>
+          <p><a href="#" class="download" id="download" download target="_blank">Download image</a></p>
+          <canvas id="canvas"></canvas>
         </div>
+      </div>
 
-        <div class="cropper">
-          <img src="images/window.jpg" alt="Picture">
-        </div>
-
-      </main>
-      <footer class="footer">
-      </footer>
+      <div class="cropper">
+        <img src="images/window.jpg" alt="Picture">
+      </div>
     </div>
 
 <!-- 

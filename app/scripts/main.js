@@ -1,5 +1,4 @@
 // jshint devel:true
-// jshint undef:false, unused:false
 
 $(function(){
 	'use strict';
@@ -32,82 +31,14 @@ $(function(){
 
   //--- Config vars ---//
 
+  var $image = $('.cropper').find('img'),
+    filename = $image.attr('src').split('/').pop(),
+    filetype = 'image/' + filename.split('.').pop();
+
+
 
   //--- Cropper ---//
 
-  // function getDimensions(){
-  //   // get input vars
-  //   var cropHeight = document.getElementById('sw').value,
-  //       cropWidth = document.getElementById('sh').value,
-  //       cropX = document.getElementById('sx').value,
-  //       cropY = document.getElementById('sy').value;
-  //   return {
-  //     x: cropX,
-  //     y: cropY,
-  //     h: cropHeight,
-  //     w: cropWidth
-  //   };
-  // }
-
-  // via http://stackoverflow.com/questions/12728188/cropping-images-in-the-browser-before-the-upload
-  // function drawCroppedImage(img, canvas, d, imgType) {
-  //   // trim the canvas
-  //   // canvas.width = d.w;
-  //   // canvas.height = d.h;
-    
-  //   // draw the image with offset
-  //   var ctx = document.getElementById('canvas').getContext('2d');
-  //   ctx.drawImage(img, d.x, d.y, d.w, d.h, 0, 0, d.w, d.h);
-    
-  //   // output the base64 of the cropped image
-  //   var url = canvas.toDataURL(imgType);
-  //   $('#output').html($('<a>',{
-  //     'class':'download',
-  //     href:url,
-  //     target: '_blank',
-  //     text:'Download'
-  //   }));
-  //   $('body').css({'background-image':'url('+url+')'});
-  // }
-
-  // function loadImage(e) {
-  //   //Retrieve the first (and only!) File from the FileList object
-  //   var f = e.target.files[0];
-
-  //   if (f) {
-  //     var reader = new FileReader();
-  //     reader.onload = function() { 
-  //       var img = new Image();
-  //       img.onload = function() {
-                
-  //           drawCroppedImage(img, document.getElementById('canvas'), getDimensions(), f.type);
-
-  //           $('.cropper').html(img).find('img').cropper({
-  //             crop: function(data) {
-  //               $('#sx').val(Math.round(data.x));
-  //               $('#sy').val(Math.round(data.y));
-  //               $('#sh').val(Math.round(data.height));
-  //               $('#sw').val(Math.round(data.width));
-
-  //               drawCroppedImage(img, document.getElementById('canvas'), getDimensions(), f.type);
-  //             }
-  //           });
-
-  //       };
-  //       img.src = event.target.result;
-  //     };
-  //     reader.readAsDataURL(f);
-  //   } else { 
-  //     alert('Failed to load image :(');
-  //   }
-  // }
-
-  // $('#fileinput').on('change', loadImage);
-
- var $image = $('.cropper > img'),
-  filetype = 'image/jpeg',
-  img = new Image();
-  img.src = $image.attr('src');
 
 
   $image.cropper({
@@ -120,32 +51,32 @@ $(function(){
       var canvas = $image.cropper('getCroppedCanvas');
       var url = canvas.toDataURL(filetype);
 
-      $('#output').html($('<a>',{
-        'class':'download',
-        href:url,
-        target: '_blank',
-        text:'Download'
-      }));
+      $('#download').attr({
+        href: url,
+        download: filename
+      });
+
       $('body').css({'background-image':'url('+url+')'});
     }
   });
 
   // Import image
   var $inputImage = $('#fileinput'),
-      URL = window.URL || window.webkitURL,
-      blobURL;
+    URL = window.URL || window.webkitURL,
+    blobURL;
+
+  
 
   if (URL) {
     $inputImage.on('change', function() {
       var files = this.files,
-          file;
+        file;
 
       if (files && files.length) {
         file = files[0];
 
         filetype = file.type;
-        img = new Image();
-        img.src = $image.attr('src');
+        filename = file.name;
 
         if (/^image\/\w+$/.test(file.type)) {
           blobURL = URL.createObjectURL(file);
@@ -154,7 +85,7 @@ $(function(){
           }).cropper('reset', true).cropper('replace', blobURL);
           $inputImage.val('');
         } else {
-          showMessage('Please choose an image file.');
+          alert('Please choose an image file.');
         }
       }
     });
@@ -167,25 +98,6 @@ $(function(){
 
 
 
-  //--- Cropper.js ---//
-
-  // $('.cropper').find('img').cropper({
-  //   preview: '.preview',
-  //   crop: function(data) {
-  //     $('#sx').val(Math.round(data.x));
-  //     $('#sy').val(Math.round(data.y));
-  //     $('#sh').val(Math.round(data.height));
-  //     $('#sw').val(Math.round(data.width));
-  //   }
-  //   // aspectRatio: NaN,
-  //   // autoCropArea: 0.65,
-  //   // strict: false,
-  //   // guides: false,
-  //   // highlight: false,
-  //   // dragCrop: false,
-  //   // movable: false,
-  //   // resizable: false
-  // });
 
 
   //--- Reformat counter share number ---//
