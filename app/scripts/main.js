@@ -35,43 +35,37 @@ $(function(){
     filename = $image.attr('src').split('/').pop(),
     filetype = 'image/' + filename.split('.').pop();
 
-  var img = new Image();
-  img.src = $image.attr('src');
-  img.onload = function(){
-    drawPattern(this);
-  };
-
 
 
   //--- Cropper ---//
-  function drawPattern(img,size) {
+  function drawPattern(img) {
     var canvas = document.getElementById('canvas');
 
     canvas.height = $(document).height();
     canvas.width = $(document).width();
 
     // default params:
-    size = size || {};
-    size.sx = size.sx || 0;
-    size.sy = size.sy || 0;
-    size.sWidth = size.sWidth || img.width;
-    size.sHeight = size.sHeight || img.height;
-    size.dx = size.dx || 0;
-    size.dy = size.dy || 0;
-    size.dWidth = size.dWidth || img.width;
-    size.dHeight = size.dHeight || img.height;
+    // size = size || {};
+    // var sx = size.sx || 0;
+    // var sy = size.sy || 0;
+    // var sWidth = size.sWidth || img.width;
+    // var sHeight = size.sHeight || img.height;
+    // var dx = 0;//size.dx || 0;
+    // var dy = 0;//size.dy || 0;
+    // var dWidth = 500;//size.dWidth || img.width;
+    // var dHeight = 500;//size.dHeight || img.height;
 
-    var tempCanvas = document.createElement('canvas'),
-    tCtx = tempCanvas.getContext('2d');
+    // var tempCanvas = document.createElement('canvas'),
+    // tCtx = tempCanvas.getContext('2d');
 
-    tempCanvas.width = size.dWidth;
-    tempCanvas.height = size.dHeight;
-    tCtx.drawImage(img, size.sx, size.sy, size.sWidth, size.sHeight, 0, 0, size.dWidth, size.dHeight);
+    // tempCanvas.width = size.sWidth;
+    // tempCanvas.height = size.sHeight;
+    // tCtx.drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 
     // use getContext to use the canvas for drawing
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = ctx.createPattern(tempCanvas, 'repeat');
+    ctx.fillStyle = ctx.createPattern(img, 'repeat');
 
     ctx.beginPath();
     ctx.rect(0,0,canvas.width,canvas.height);
@@ -95,19 +89,21 @@ $(function(){
         download: filename
       });
 
-      var cd = $image.cropper('getCanvasData');
-      var cbd = $image.cropper('getCropBoxData');
-      var size = {
-        sx: cbd.left,
-        sy: cbd.top,
-        sWidth: cbd.width,
-        sHeight: cbd.height,
-        dx: cd.left,
-        dy: cd.top,
-        dWidth: cd.width,
-        dHeight: cd.height
-      };
-      drawPattern(img,size);
+      // var cd = $image.cropper('getCanvasData');
+      // var cbd = $image.cropper('getCropBoxData');
+      // var size = {
+      //   sx: cbd.left,
+      //   sy: cbd.top,
+      //   sWidth: cbd.width,
+      //   sHeight: cbd.height,
+      //   dx: data.left,
+      //   dy: data.top,
+      //   dWidth: data.width,
+      //   dHeight: data.height
+      // };
+      // $('#cd').text('getCanvasData: { left:'+cd.left+', top:'+cd.top+', width:'+cd.width+', height:'+cd.height+'}');
+      // $('#cbd').text('getCropBoxData: { left:'+cbd.left+', top:'+cbd.top+', width:'+cbd.width+', height:'+cbd.height+'}');
+      drawPattern(cropCanvas);
       // $('body').css({'background-image':'url('+url+')'});
     }
   });
@@ -139,12 +135,6 @@ $(function(){
             URL.revokeObjectURL(blobURL); // Revoke when load complete
           }).cropper('reset', true).cropper('replace', blobURL);
           $inputImage.val('');
-
-          img = new Image();
-          img.src = blobURL;
-          img.onload = function(){
-            drawPattern(this);
-          };
 
         } else {
           alert('Please choose an image file.');
