@@ -366,8 +366,8 @@ module.exports = function (grunt) {
       },
       stage: {
         options: {
-          remote: 'git@github.com:richardwestenra/bgRepeater.git',
-          branch: 'master'
+          remote: 'git@github.com:richardwestenra/repeater.git',
+          branch: 'gh-pages'
         }
       },
       local: {
