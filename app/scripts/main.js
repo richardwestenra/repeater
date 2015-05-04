@@ -44,24 +44,6 @@ $(function(){
     canvas.height = $(document).height();
     canvas.width = $(document).width();
 
-    // default params:
-    // size = size || {};
-    // var sx = size.sx || 0;
-    // var sy = size.sy || 0;
-    // var sWidth = size.sWidth || img.width;
-    // var sHeight = size.sHeight || img.height;
-    // var dx = 0;//size.dx || 0;
-    // var dy = 0;//size.dy || 0;
-    // var dWidth = 500;//size.dWidth || img.width;
-    // var dHeight = 500;//size.dHeight || img.height;
-
-    // var tempCanvas = document.createElement('canvas'),
-    // tCtx = tempCanvas.getContext('2d');
-
-    // tempCanvas.width = size.sWidth;
-    // tempCanvas.height = size.sHeight;
-    // tCtx.drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-
     // use getContext to use the canvas for drawing
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -84,25 +66,10 @@ $(function(){
       var cropCanvas = $image.cropper('getCroppedCanvas');
       var url = cropCanvas.toDataURL(filetype);
 
-      $('#download').attr({
-        href: url,
-        download: filename
+      $('#download').on('click',function(){
+        $(this).attr({ href: url, download: filename });
       });
 
-      // var cd = $image.cropper('getCanvasData');
-      // var cbd = $image.cropper('getCropBoxData');
-      // var size = {
-      //   sx: cbd.left,
-      //   sy: cbd.top,
-      //   sWidth: cbd.width,
-      //   sHeight: cbd.height,
-      //   dx: data.left,
-      //   dy: data.top,
-      //   dWidth: data.width,
-      //   dHeight: data.height
-      // };
-      // $('#cd').text('getCanvasData: { left:'+cd.left+', top:'+cd.top+', width:'+cd.width+', height:'+cd.height+'}');
-      // $('#cbd').text('getCropBoxData: { left:'+cbd.left+', top:'+cbd.top+', width:'+cbd.width+', height:'+cbd.height+'}');
       drawPattern(cropCanvas);
       // $('body').css({'background-image':'url('+url+')'});
     }
