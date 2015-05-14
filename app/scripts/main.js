@@ -29,23 +29,93 @@ $(function(){
 
 
 
-  //--- Global variables ---//
+  //--- Config vars ---//
 
-  var $embed = $('#embed');
+  var $image = $('.cropper').find('img'),
+    filename = $image.attr('src').split('/').pop(),
+    filetype = 'image/' + filename.split('.').pop();
 
 
 
-  
-  //--- Embed button ---//
+  //--- Cropper ---//
+  function drawPattern(img) {
+    var canvas = document.getElementById('canvas');
 
-  $('.embedLink').on('click',function(e) {
-    e.preventDefault();
-    if ($embed.hasClass('visible')) {
-      $embed.animate({bottom:'-200px'},'slow').fadeOut({queue:false}).removeClass('visible');
-    } else {
-      $embed.animate({bottom:'0px'},'slow').fadeIn({queue:false}).addClass('visible');
+    canvas.height = $(document).height();
+    canvas.width = $(document).width();
+
+    // use getContext to use the canvas for drawing
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = ctx.createPattern(img, 'repeat');
+
+    ctx.beginPath();
+    ctx.rect(0,0,canvas.width,canvas.height);
+    ctx.fill();
+
+  }
+
+
+  $image.cropper({
+    crop: function(data) {
+      $('#sx').val(Math.round(data.x));
+      $('#sy').val(Math.round(data.y));
+      $('#sh').val(Math.round(data.height));
+      $('#sw').val(Math.round(data.width));
+
+      var cropCanvas = $image.cropper('getCroppedCanvas');
+      var url = cropCanvas.toDataURL(filetype);
+
+      $('#download').on('click',function(){
+        $(this).attr({ href: url, download: filename });
+      });
+
+      drawPattern(cropCanvas);
+      // $('body').css({'background-image':'url('+url+')'});
     }
   });
+
+
+
+  // Import image
+  var $inputImage = $('#fileinput'),
+    URL = window.URL || window.webkitURL,
+    blobURL;
+
+  
+
+  if (URL) {
+    $inputImage.on('change', function() {
+      var files = this.files,
+        file;
+
+      if (files && files.length) {
+        file = files[0];
+
+        filetype = file.type;
+        filename = file.name;
+
+
+        if (/^image\/\w+$/.test(file.type)) {
+          blobURL = URL.createObjectURL(file);
+          $image.one('built.cropper', function () {
+            URL.revokeObjectURL(blobURL); // Revoke when load complete
+          }).cropper('reset', true).cropper('replace', blobURL);
+          $inputImage.val('');
+
+        } else {
+          alert('Please choose an image file.');
+        }
+      }
+    });
+  } else {
+    $inputImage.parent().remove();
+  }
+
+
+
+
+
 
 
 
