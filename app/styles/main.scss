@@ -7,49 +7,104 @@
 
 
 body {
-	padding: 2em 1em 4em;
 }
-.container {
-	// @include clearfix;
-	position: relative;
-}
-.topPanel {
-	background: rgba(#fff,0.8);
-	padding: 1em 2em;
-	margin-bottom: 20px;
-}
-.formRow {
-	margin: 0.8em 0;
-	input {
-		padding: 5px;
-		width: 80px;
-		border: none;
-		margin-right: 1em;
-	}
-}
+
 #canvas {
-	// display: none;
 	position: absolute;
-	// height: 100%;
-	// width: 100%;
+	height: 100%;
+	width: 100%;
 	left: 0;
 	top: 0;
 	z-index: 0;
 	pointer-events: none;
 }
-.download {
-	display: inline-block;
-	background: $c_link;
-	color: $c_opposite;
-	text-decoration: none;
-	border-radius: 3px;
-	padding: 0.5em 2em;
-	font-weight: bold;
+
+header {
+	position: relative;
+	width: 100%;
+	background: #222;
+	border-bottom: 1px solid #111;
+	box-shadow: 0 1px 3px rgba(#000,0.4);
+	padding: 0.7em 2em;
+	color: #fff;
+	z-index: 3;
+	@include clearfix;
+	@media (min-height:$m_smallish) and (min-width: $m_large) {
+		padding: 1em 3em;
+	}
+}
+.title {
+	margin: 0;
+	font-size: 1em;
+	float: left;
 }
 
+nav {
+	float: right;
+}
+.btn {
+    display: inline-block;
+    cursor: pointer;
+	margin: 0 2em;
+	font-weight: bold;
+	vertical-align: middle;
+	font-size: 0.9em;
+	color: #fff;
+	text-decoration: none;
+	// background: $c_link;
+	// color: $c_opposite;
+	// border-radius: 3px;
+	// padding: 0.5em 2em;
+	padding: 0.15em 0;
+	&:hover, &:focus {
+		box-shadow: 0 2px 0 rgba(#fff,0.5);
+		// text-decoration: underline;
+	}
+}
+
+.upload {
+    position: relative;
+    overflow: hidden;
+	input {
+	    position: absolute;
+	    top: 0;
+	    right: 0;
+	    margin: 0;
+	    padding: 0;
+	    opacity: 0;
+	    cursor: pointer;
+	}
+}
+.download {
+}
+
+// .container {
+// 	// @include clearfix;
+// 	position: relative;
+// }
+// .topPanel {
+// 	background: rgba(#fff,0.8);
+// 	padding: 1em 2em;
+// 	margin-bottom: 20px;
+// }
+// .formRow {
+// 	margin: 0.8em 0;
+// 	input {
+// 		padding: 5px;
+// 		width: 80px;
+// 		border: none;
+// 		margin-right: 1em;
+// 	}
+// }
+
 .cropper {
-	height: 400px;
+	position: relative;
+	width: 50vmin;
+	height: 50vmin;
 	border: 4px solid #fff;
+	border-width: 0 4px 4px 0;
+	border-radius: 0 0 3px 0;
+	box-shadow: 0 0 3px rgba(#000,0.3);
 }
 
 @import "social";

@@ -2,8 +2,8 @@
 <html class="no-js" lang="">
   <head>
     <meta charset="utf-8">
-    <title>nbed_metaTitle</title>
-    <meta name="description" content="nbed_desc">
+    <title>Repeater | for all your tiled background image cropping needs</title>
+    <meta name="description" content="nbed_metaDesc">
     <meta name="viewport" content="width=device-width">
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -23,31 +23,7 @@
     <!-- endbuild -->
     <![endif]-->
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="nbed_twitter">
-    <meta name="twitter:title" content="nbed_socialTitle">
-    <meta name="twitter:description" content="nbed_socialDesc">
-    <!-- NBED check png/jpg filetypes: -->
-    <meta property="twitter:image:src" content="http://nbed_url/social/twitter.png">
-
-
-    <!-- G+ -->
-    <meta itemprop="name" content="nbed_socialTitle">
-    <meta itemprop="description" content="nbed_socialDesc">
-    <meta itemprop="image" content="http://nbed_url/social/og200.png">
-
-    <!-- Facebook Markup -->
-    <meta property="og:title" content="nbed_socialTitle">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="http://nbed_url/social/og200.png">
-    <meta property="og:image:width" content="200">
-    <meta property="og:image:height" content="200">
-    <meta property="og:image" content="http://nbed_url/social/og1200.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:url" content="http://nbed_url/">
-    <meta property="og:description" content="nbed_socialDesc">
+    <meta name="twitter:site" content="RichardWestenra">
   </head>
   <body>
     <!--[if lt IE 8]>
@@ -59,30 +35,36 @@
 
     <canvas id="canvas"></canvas>
 
-    <div class="container wrapper">
-      <div class="topPanel">
-        <header>
-          <h1>Repeating background image cropper</h1>
-        </header>
-        <div class="canvasCrop">
+    <header>
+      <h1 class="title"><i class="icon-grid"></i> Repeater</h1>
+      <nav>
+        <a class="upload btn" href="#">
+          <span><i class="icon-upload"></i> Import</span>
           <input type="file" id="fileinput" />
-          <div class="formRow">x: <input type="number" id="sx" size="2" value="" /> 
-          y: <input type="number" id="sy" size="2" value="" /></div>
-          <div class="formRow">width: <input type="number" id="sw" size="2" value="" /> 
-          height: <input type="number" id="sh" size="2" value="" /></div>
-          <p id="cd"></p>
-          <p id="cbd"></p>
-          <p><a href="#" class="download" id="download" download target="_blank">Download image</a></p>
-        </div>
-      </div>
+        </a>
+        <a href="#" class="download btn" id="download" download target="_blank"><i class="icon-download"></i> Save</a>
+        <a href="#" class="about btn" id="about"><i class="icon-info-circled"></i> About</a>
+        <a href="#" class="share btn" id="share"><i class="icon-share"></i> Share</a>
+      </nav>
+    </header>
+<!-- 
+    <div class="canvasCrop">
+      <div class="formRow">x: <input type="number" id="sx" size="2" value="" /> 
+      y: <input type="number" id="sy" size="2" value="" /></div>
+      <div class="formRow">width: <input type="number" id="sw" size="2" value="" /> 
+      height: <input type="number" id="sh" size="2" value="" /></div>
+      <p id="cd"></p>
+      <p id="cbd"></p>
+      <p></p>
+    </div>
+  -->
 
-      <div class="cropper">
-        <img src="images/window.jpg" alt="Picture">
-      </div>
+    <div class="cropper">
+      <img src="images/window.jpg" alt="Picture">
     </div>
 
 <!-- 
-    <div class="social social-likes social-likes_vertical social-likes_notext" data-url="http://nbed_url/" data-title="nbed_socialTitle">
+    <div class="social social-likes social-likes_vertical social-likes_notext" data-url="http://nbed_url/" data-title="Repeater | for all your tiled background image cropping needs">
       <a class="facebook" href="#" title="Share link on Facebook">Facebook</a>
       <a class="twitter" href="#" data-via="nbed_twitter" data-title="nbed_tweet" title="Share link on Twitter">Twitter</a>
       <a class="plusone" href="#" title="Share link on Google+">Google+</a>
