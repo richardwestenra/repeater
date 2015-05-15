@@ -43,24 +43,36 @@
           <input type="file" id="fileinput" />
         </a>
         <a href="#" class="download btn" id="download" download target="_blank"><i class="icon-download"></i> Save</a>
-        <a href="#" class="about btn" id="about"><i class="icon-info-circled"></i> About</a>
+        <a href="#" class="info btn" id="info"><i class="icon-info"></i> About</a>
         <a href="#" class="share btn" id="share"><i class="icon-share"></i> Share</a>
       </nav>
     </header>
-<!-- 
-    <div class="canvasCrop">
-      <div class="formRow">x: <input type="number" id="sx" size="2" value="" /> 
-      y: <input type="number" id="sy" size="2" value="" /></div>
-      <div class="formRow">width: <input type="number" id="sw" size="2" value="" /> 
-      height: <input type="number" id="sh" size="2" value="" /></div>
-      <p id="cd"></p>
-      <p id="cbd"></p>
-      <p></p>
-    </div>
-  -->
 
+    <p id="values" class="values">
+      X: <span id="sx"></span>
+      Y: <span id="sy"></span>
+      Width: <span id="sw"></span>
+      Height: <span id="sh"></span>
+      Rotation: <span id="sr"></span>
+    </p>
+ 
     <div class="cropper">
-      <img src="images/window.jpg" alt="Picture">
+      <button id="toggle" class="toggle"><i class="icon-left"></i></button>
+      <nav id="cropControls">
+        <button title="Zoom in" data-action="zoom" data-value="0.1"><i class="icon-zoom-in"></i></button>
+        <button title="Zoom out" data-action="zoom" data-value="-0.1"><i class="icon-zoom-out"></i></button>
+        <button title="Rotate anticlockwise" data-action="rotate" data-value="-0.1"><i class="icon-ccw"></i></button>
+        <button title="Rotate clockwise" data-action="rotate" data-value="0.1"><i class="icon-cw"></i></button>
+        <button title="Reset" data-action="reset"><i class="icon-reset"></i></button>
+      </nav>
+      <img src="images/bg.jpg" alt="Damask" />
+    </div>
+
+    <div id="about" class="about modal">
+      <h2>Repeater helps you crop repeating image tiles</h2>
+      <p>The trickiest part of making a repeating tile from an image of a pattern is getting the edges to wrap nicely. Repeater helps with this by displaying the tiled result as you crop, so you can easily spot where to adjust the crop dimensions.</p>
+      <p>Start a new project by uploading a PNG or JPEG image. Adjust the crop box until the pattern tiles nicely, then click Save to download the cropped image file.</p>
+      <p>Made by <a href="http://richardwestenra.com">Richard Westenra</a>.</p>
     </div>
 
 <!-- 

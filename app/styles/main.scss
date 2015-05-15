@@ -32,6 +32,9 @@ header {
 	@media (min-height:$m_smallish) and (min-width: $m_large) {
 		padding: 1em 3em;
 	}
+	nav {
+		float: right;
+	}
 }
 .title {
 	margin: 0;
@@ -39,9 +42,6 @@ header {
 	float: left;
 }
 
-nav {
-	float: right;
-}
 .btn {
     display: inline-block;
     cursor: pointer;
@@ -78,33 +78,91 @@ nav {
 .download {
 }
 
-// .container {
-// 	// @include clearfix;
-// 	position: relative;
-// }
-// .topPanel {
-// 	background: rgba(#fff,0.8);
-// 	padding: 1em 2em;
-// 	margin-bottom: 20px;
-// }
-// .formRow {
-// 	margin: 0.8em 0;
-// 	input {
-// 		padding: 5px;
-// 		width: 80px;
-// 		border: none;
-// 		margin-right: 1em;
-// 	}
-// }
+.values {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	background: rgba(black,0.7);
+	color: white;
+	padding: 0.4em 0 0.2em 1.5em;
+	font-size: 0.9em;
+	border-radius: 0 3px 0 0;
+	transition: all ease .1s;
+	text-shadow: 0 1px 2px black;
+	&:hover {
+		background: #111;
+		font-size: 1em;
+		padding: 0.6em 0 0.3em 2em;
+	}
+	span {
+		margin-right: 1.5em;
+	}
+}
 
 .cropper {
 	position: relative;
 	width: 50vmin;
 	height: 50vmin;
-	border: 4px solid #fff;
-	border-width: 0 4px 4px 0;
+	border: 6px solid #fff;
+	border-width: 0 6px 6px 0;
 	border-radius: 0 0 3px 0;
 	box-shadow: 0 0 3px rgba(#000,0.3);
+	nav {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		z-index: 10;
+		button {
+			border: none;
+			background: $c_link;
+			text-decoration: none;
+			color: white;
+			padding: 0.4em 1em;
+			display: block;
+			float: left;
+			border-left: 1px solid darken($c_link,5%);
+			text-shadow: 0 1px 2px rgba(black,0.2);
+			font-size: 0.8em;
+			cursor: pointer;
+			outline: none;
+			transition: all ease .1s;
+			&:hover, &:focus {
+				border-color: darken($c_link,10%);
+				background: darken($c_link,5%);
+			}
+			&:first-child {
+				border-radius: 4px 0 0 0;
+				border: none;
+			}
+		}
+	}
+}
+.toggle {
+	position: absolute;
+	width: 1.5em;
+	height: 2.5em;
+	right: -1.5em;
+	font-size: 1em;
+	top: 50%;
+	margin-top: -2em;
+	background: white;
+	border: none;
+	border-radius: 0 100% 100% 0;
+	cursor: pointer;
+	text-align: center;
+	box-shadow: 1px 0 3px rgba(#000,0.3);
+	z-index: 0;
+	outline: none;
+	transition: all ease .1s;
+	&:hover, &:focus {
+		width: 2em;
+		right: -2em;
+	}
+	i:before {
+		width: auto;
+		margin: 0;
+	}
 }
 
 @import "social";

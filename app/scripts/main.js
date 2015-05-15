@@ -32,6 +32,7 @@ $(function(){
   //--- Config vars ---//
 
   var $image = $('.cropper').find('img'),
+    $values = $('#values'),
     filename = $image.attr('src').split('/').pop(),
     filetype = 'image/' + filename.split('.').pop();
 
@@ -58,13 +59,15 @@ $(function(){
 
   $image.cropper({
     crop: function(data) {
-      $('#sx').val(Math.round(data.x));
-      $('#sy').val(Math.round(data.y));
-      $('#sh').val(Math.round(data.height));
-      $('#sw').val(Math.round(data.width));
+      $values
+        .find('#sx').text(Math.round(data.x)+'px').end()
+        .find('#sy').text(Math.round(data.y)+'px').end()
+        .find('#sh').text(Math.round(data.height)+'px').end()
+        .find('#sw').text(Math.round(data.width)+'px').end()
+        .find('#sr').html(Math.round(data.rotate*10)/10+'&deg;');
 
       var cropCanvas = $image.cropper('getCroppedCanvas');
-      var url = cropCanvas.toDataURL(filetype);
+      var url = cropCanvas.toDataURL(filetype, 1);
 
       $('#download').on('click',function(){
         $(this).attr({ href: url, download: filename });
@@ -72,6 +75,25 @@ $(function(){
 
       drawPattern(cropCanvas);
       // $('body').css({'background-image':'url('+url+')'});
+    }
+  });
+
+  $('#cropControls').find('button').on('click',function(){
+    var action = $(this).data('action'),
+      value = +$(this).data('value');
+    $image.cropper(action,value);
+  });
+
+  $('#toggle').on('click',function(){
+    var $icon = $(this).find('i');
+    var $container = $(this).parents('.cropper');
+    var visible = $icon.hasClass('icon-left');
+    if (visible) {
+      $container.animate({'left': -$container.outerWidth()});
+      $icon.removeClass().addClass('icon-right');
+    } else {
+      $container.animate({'left': 0});
+      $icon.removeClass().addClass('icon-left');
     }
   });
 
