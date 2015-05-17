@@ -31,34 +31,40 @@ $(function(){
 
   //--- Config vars ---//
 
-  var $image = $('.cropper').find('img'),
+  var $document = $(document),
+    $image = $('.cropper').find('img'),
     $values = $('#values'),
+    $download = $('#download'),
+    canvas = document.getElementById('canvas'),
+    ctx = canvas.getContext('2d'),
+    $fileinput = $('#fileinput'),
     filename = $image.attr('src').split('/').pop(),
     filetype = 'image/' + filename.split('.').pop();
 
 
 
-  //--- Cropper ---//
+  // Draw repeating img tile on canvas bg
   function drawPattern(img) {
-    var canvas = document.getElementById('canvas');
-
-    canvas.height = $(document).height();
-    canvas.width = $(document).width();
-
-    // use getContext to use the canvas for drawing
-    var ctx = canvas.getContext('2d');
+    canvas.height = $document.height();
+    canvas.width = $document.width();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = ctx.createPattern(img, 'repeat');
-
     ctx.beginPath();
     ctx.rect(0,0,canvas.width,canvas.height);
     ctx.fill();
-
   }
 
 
+  // Redraw pattern on window resize
+  $(window).on('resize',function(){
+    drawPattern( $image.cropper('getCroppedCanvas') );
+  });
+
+
+  // Initialise image cropper
   $image.cropper({
     crop: function(data) {
+      // Show crop data on page
       $values
         .find('#sx').text(Math.round(data.x)+'px').end()
         .find('#sy').text(Math.round(data.y)+'px').end()
@@ -66,24 +72,27 @@ $(function(){
         .find('#sw').text(Math.round(data.width)+'px').end()
         .find('#sr').html(Math.round(data.rotate*10)/10+'&deg;');
 
+      // Get cropped image
       var cropCanvas = $image.cropper('getCroppedCanvas');
-      var url = cropCanvas.toDataURL(filetype, 1);
 
-      $('#download').on('click',function(){
+      // Update download link only on click, to reduce DOM ops/memory leaks
+      $download.on('click',function(){
+        var url = cropCanvas.toDataURL(filetype, 1);
         $(this).attr({ href: url, download: filename });
       });
 
       drawPattern(cropCanvas);
-      // $('body').css({'background-image':'url('+url+')'});
     }
   });
 
+  // Add extra crop controls
   $('#cropControls').find('button').on('click',function(){
     var action = $(this).data('action'),
       value = +$(this).data('value');
     $image.cropper(action,value);
   });
 
+  // Add button to show/hide crop window for more screen real estate, if needed
   $('#toggle').on('click',function(){
     var $icon = $(this).find('i');
     var $container = $(this).parents('.cropper');
@@ -99,31 +108,25 @@ $(function(){
 
 
 
-  // Import image
-  var $inputImage = $('#fileinput'),
-    URL = window.URL || window.webkitURL,
-    blobURL;
-
-  
+  // Import/upload images
+  var URL = window.URL || window.webkitURL;
 
   if (URL) {
-    $inputImage.on('change', function() {
+    $fileinput.on('change',function() {
       var files = this.files,
         file;
 
       if (files && files.length) {
         file = files[0];
-
         filetype = file.type;
         filename = file.name;
 
-
-        if (/^image\/\w+$/.test(file.type)) {
-          blobURL = URL.createObjectURL(file);
+        if (/^image\/\w+$/.test(filetype)) {
+          var blobURL = URL.createObjectURL(file);
           $image.one('built.cropper', function () {
             URL.revokeObjectURL(blobURL); // Revoke when load complete
           }).cropper('reset', true).cropper('replace', blobURL);
-          $inputImage.val('');
+          $fileinput.val('');
 
         } else {
           alert('Please choose an image file.');
@@ -131,7 +134,10 @@ $(function(){
       }
     });
   } else {
-    $inputImage.parent().remove();
+    $fileinput.on('click',function(e){
+      e.preventDefault();
+      alert('The features required to make this work aren\'t supported in your browser :(. Try Chrome, maybe?');
+    });
   }
 
 
@@ -151,35 +157,3 @@ $(function(){
 
 
 });
-
-
-
-//--- Add Linkedin to Social Likes ---//
-
-var socialLikesButtons = { // must be global because plugin requires it
-  linkedin: {
-    counterUrl: 'http://www.linkedin.com/countserv/count/share?url={url}',
-    counter: function(jsonUrl, deferred) {
-      'use strict';
-      var options = socialLikesButtons.linkedin;
-      if (!options._) {
-        options._ = {};
-        if (!window.IN) {
-          window.IN = {Tags: {}};
-        }
-        window.IN.Tags.Share = {
-          handleCount: function(params) {
-            var jsonUrl = options.counterUrl.replace(/{url}/g, encodeURIComponent(params.url));
-            options._[jsonUrl].resolve(params.count);
-          }
-        };
-      }
-      options._[jsonUrl] = deferred;
-      $.getScript(jsonUrl)
-      .fail(deferred.reject);
-    },
-    popupUrl: 'http://www.linkedin.com/shareArticle?mini=false&url={url}&title={title}',
-    popupWidth: 650,
-    popupHeight: 500
-  }
-};

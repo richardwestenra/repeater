@@ -102,8 +102,8 @@ header {
 
 .cropper {
 	position: relative;
-	width: 50vmin;
-	height: 50vmin;
+	width: 300px;
+	height: 300px;
 	border: 6px solid #fff;
 	border-width: 0 6px 6px 0;
 	border-radius: 0 0 3px 0;
@@ -113,12 +113,13 @@ header {
 		bottom: 0;
 		right: 0;
 		z-index: 10;
+		width: 100%;
 		button {
 			border: none;
 			background: $c_link;
 			text-decoration: none;
 			color: white;
-			padding: 0.4em 1em;
+			padding: 0.4em;
 			display: block;
 			float: left;
 			border-left: 1px solid darken($c_link,5%);
@@ -127,15 +128,30 @@ header {
 			cursor: pointer;
 			outline: none;
 			transition: all ease .1s;
+			width: (100%/5);
 			&:hover, &:focus {
 				border-color: darken($c_link,10%);
 				background: darken($c_link,5%);
 			}
 			&:first-child {
-				border-radius: 4px 0 0 0;
 				border: none;
 			}
 		}
+	}
+	@media (min-width: $m_tablet) and (min-height: $m_smallish) {
+		width: 50vmin;
+		height: 50vmin;
+		nav {
+			width: auto;
+			button {
+				padding: 0.4em 1em;
+				width: auto;
+				&:first-child {
+					border-radius: 4px 0 0 0;
+				}
+			}
+		}
+
 	}
 }
 .toggle {
