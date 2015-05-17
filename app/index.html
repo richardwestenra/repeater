@@ -2,11 +2,12 @@
 <html class="no-js" lang="">
   <head>
     <meta charset="utf-8">
-    <title>nbed_metaTitle</title>
-    <meta name="description" content="nbed_desc">
+    <title>Repeater | for all your tiled background image cropping needs</title>
+    <meta name="description" content="nbed_metaDesc">
     <meta name="viewport" content="width=device-width">
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/cropper/dist/cropper.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -22,71 +23,66 @@
     <!-- endbuild -->
     <![endif]-->
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="nbed_twitter">
-    <meta name="twitter:title" content="nbed_socialTitle">
-    <meta name="twitter:description" content="nbed_socialDesc">
-    <!-- NBED check png/jpg filetypes: -->
-    <meta property="twitter:image:src" content="http://nbed_url/social/twitter.png">
-
-
-    <!-- G+ -->
-    <meta itemprop="name" content="nbed_socialTitle">
-    <meta itemprop="description" content="nbed_socialDesc">
-    <meta itemprop="image" content="http://nbed_url/social/og200.png">
-
-    <!-- Facebook Markup -->
-    <meta property="og:title" content="nbed_socialTitle">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="http://nbed_url/social/og200.png">
-    <meta property="og:image:width" content="200">
-    <meta property="og:image:height" content="200">
-    <meta property="og:image" content="http://nbed_url/social/og1200.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:url" content="http://nbed_url/">
-    <meta property="og:description" content="nbed_socialDesc">
-
-    <meta name="linkstant" content="10500108">
+    <meta name="twitter:site" content="RichardWestenra">
   </head>
   <body>
-    <!--[if lt IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <!--[if lt IE 10]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <noscript>
-      <p class="browsehappy">For full functionality of this site it is necessary to enable JavaScript. Here are <a href="http://www.enable-javascript.com/" target="_blank">instructions how to enable JavaScript in your web browser</a>.</p>
+      <p class="browsehappy">To make this work, you'll need to enable JavaScript. Here are <a href="http://www.enable-javascript.com/" target="_blank">instructions how to enable JavaScript in your web browser</a>.</p>
     </noscript>
 
+    <canvas id="canvas"></canvas>
 
-    <div class="container">
-      <div class="header wrapper">
-        <h1>nbed_metaTitle</h1>
+    <header>
+      <div class="title">
+        <h1><i class="icon-grid"></i> <span>Repeater</span></h1>
       </div>
-      <div class="main wrapper">
-        <p>main</p>
-      </div>
-      <div class="footer wrapper">
-        <p>footer</p>
-      </div>
+      <nav>
+        <a class="upload btn" href="#">
+          <i class="icon-upload"></i> <span>Import</span>
+          <input type="file" id="fileinput" />
+        </a>
+        <a href="#" class="download btn" id="download" download target="_blank"><i class="icon-download"></i> <span>Save</span></a>
+        <a href="#" class="info btn" id="info"><i class="icon-info"></i> <span>About</span></a>
+      </nav>
+    </header>
+
+    <p id="values" class="values">
+      X: <span id="sx"></span>
+      Y: <span id="sy"></span>
+      Width: <span id="sw"></span>
+      Height: <span id="sh"></span>
+      Rotation: <span id="sr"></span>
+    </p>
+ 
+    <div class="cropper">
+      <button id="toggle" class="toggle"><i class="icon-left"></i></button>
+      <nav id="cropControls">
+        <button title="Zoom in" data-action="zoom" data-value="0.1"><i class="icon-zoom-in"></i></button>
+        <button title="Zoom out" data-action="zoom" data-value="-0.1"><i class="icon-zoom-out"></i></button>
+        <button title="Rotate anticlockwise" data-action="rotate" data-value="-0.1"><i class="icon-ccw"></i></button>
+        <button title="Rotate clockwise" data-action="rotate" data-value="0.1"><i class="icon-cw"></i></button>
+        <button title="Reset" data-action="reset"><i class="icon-reset"></i></button>
+      </nav>
+      <img src="images/bg.jpg" alt="Damask" />
+    </div>
+
+    <div class="modalBg closeModal"></div>
+    <div id="about" class="about modal">
+      <h2>Repeater helps you crop repeating image tiles.</h2>
+      <a href="#" class="closeModal">&times;</a>
+      <p>The trickiest part of making a repeating tile from an image of a pattern is getting the edges to wrap nicely. Repeater helps with this by displaying the tiled result as you crop, so you can easily spot where to adjust the crop dimensions.</p>
+      <p>Start a new project by uploading a PNG or JPEG image. Adjust the crop box until the pattern tiles nicely, then click Save to download the cropped image file.</p>
+      <p>Made by <a href="http://richardwestenra.com">Richard Westenra</a>.</p>
     </div>
 
 
-    <div id="embed" style="display:none;">
-      <h5>Love it? Embed it on your website or blog:</h5>
-      <a href="#" class="embedLink closeEmbed">&times;</a>
-      <!-- NBED check client name and png/jpg filetypes: -->
-      <textarea onclick="this.select();">&lt;a href=&quot;http://nbed_url/&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://nbed_url/social/embed.png&quot; border=&quot;0&quot; width=&quot;550&quot; height=&quot;550&quot; /&gt;&lt;/a&gt;&lt;br /&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Click image to open interactive version (via &lt;a href=&quot;http://www.0distilled.co.uk/&quot;&gt;0distilled&lt;/a&gt;).&lt;/span&gt;</textarea>
-    </div>
-
-
-    <div class="social social-likes social-likes_vertical social-likes_notext" data-url="http://nbed_url/" data-title="nbed_socialTitle">
+    <div class="social social-likes social-likes_vertical social-likes_notext">
       <a class="facebook" href="#" title="Share link on Facebook">Facebook</a>
-      <a class="twitter" href="#" data-via="nbed_twitter" data-title="nbed_tweet" title="Share link on Twitter">Twitter</a>
+      <a class="twitter" href="#" data-via="RichardWestenra" data-title="Repeater makes cropping tiled background images easy" title="Share link on Twitter">Twitter</a>
       <a class="plusone" href="#" title="Share link on Google+">Google+</a>
-      <a class="linkedin" href="#" title="Share link on LinkedIn">LinkedIn</a>
-      <a class="pinterest" href="#" title="Share image on Pinterest" data-media="http://nbed_url/social/og1200.png">Pinterest</a>
-      <a class="embedLink" href="#" title="Embed link on your website"><span class="social-likes__button">Embed</span></a>
     </div>
 
 
@@ -94,7 +90,12 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/social-likes/src/social-likes.js"></script>
+    <script src="bower_components/cropper/dist/cropper.js"></script>
     <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({app,.tmp}) scripts/main.js -->
+    <script src="scripts/main.js"></script>
     <!-- endbuild -->
 
     <!-- NBED: Google Analytics: change UA-XXXXX-X to be your site's ID.
@@ -107,12 +108,5 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
     -->
-
-
-    <script src="http://www.linkstant.com/linkstant.js" type="text/javascript"></script>
-
-        <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
-</body>
+  </body>
 </html>

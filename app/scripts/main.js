@@ -29,23 +29,131 @@ $(function(){
 
 
 
-  //--- Global variables ---//
+  //--- Config vars ---//
 
-  var $embed = $('#embed');
+  var $document = $(document),
+    $image = $('.cropper').find('img'),
+    $values = $('#values'),
+    $download = $('#download'),
+    canvas = document.getElementById('canvas'),
+    ctx = canvas.getContext('2d'),
+    $fileinput = $('#fileinput'),
+    filename = $image.attr('src').split('/').pop(),
+    filetype = 'image/' + filename.split('.').pop();
 
 
 
-  
-  //--- Embed button ---//
+  // Draw repeating img tile on canvas bg
+  function drawPattern(img) {
+    canvas.height = $document.height();
+    canvas.width = $document.width();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = ctx.createPattern(img, 'repeat');
+    ctx.beginPath();
+    ctx.rect(0,0,canvas.width,canvas.height);
+    ctx.fill();
+  }
 
-  $('.embedLink').on('click',function(e) {
-    e.preventDefault();
-    if ($embed.hasClass('visible')) {
-      $embed.animate({bottom:'-200px'},'slow').fadeOut({queue:false}).removeClass('visible');
-    } else {
-      $embed.animate({bottom:'0px'},'slow').fadeIn({queue:false}).addClass('visible');
+
+  // Redraw pattern on window resize
+  $(window).on('resize',function(){
+    drawPattern( $image.cropper('getCroppedCanvas') );
+  });
+
+
+  // Initialise image cropper
+  $image.cropper({
+    crop: function(data) {
+      // Show crop data on page
+      $values
+        .find('#sx').text(Math.round(data.x)+'px').end()
+        .find('#sy').text(Math.round(data.y)+'px').end()
+        .find('#sh').text(Math.round(data.height)+'px').end()
+        .find('#sw').text(Math.round(data.width)+'px').end()
+        .find('#sr').html(Math.round(data.rotate*10)/10+'&deg;');
+
+      // Get cropped image
+      var cropCanvas = $image.cropper('getCroppedCanvas');
+
+      // Update download link only on click, to reduce DOM ops/memory leaks
+      $download.on('click',function(){
+        var url = cropCanvas.toDataURL(filetype, 1);
+        $(this).attr({ href: url, download: filename });
+      });
+
+      drawPattern(cropCanvas);
     }
   });
+
+  // Add extra crop controls
+  $('#cropControls').find('button').on('click',function(){
+    var action = $(this).data('action'),
+      value = +$(this).data('value');
+    $image.cropper(action,value);
+  });
+
+  // Add button to show/hide crop window for more screen real estate, if needed
+  $('#toggle').on('click',function(){
+    var $icon = $(this).find('i');
+    var $container = $(this).parents('.cropper');
+    var visible = $icon.hasClass('icon-left');
+    if (visible) {
+      $container.animate({'left': -$container.outerWidth()});
+      $icon.removeClass().addClass('icon-right');
+    } else {
+      $container.animate({'left': 0});
+      $icon.removeClass().addClass('icon-left');
+    }
+  });
+
+  // Add button to show/hide crop window for more screen real estate, if needed
+  $('#info').on('click',function(e){
+    e.preventDefault();
+    $('body').toggleClass('showModal');
+  });
+  $('.closeModal').on('click',function(e){
+    e.preventDefault();
+    $('body').removeClass('showModal');
+  });
+
+
+
+  // Import/upload images
+  var URL = window.URL || window.webkitURL;
+
+  if (URL) {
+    $fileinput.on('change',function() {
+      var files = this.files,
+        file;
+
+      if (files && files.length) {
+        file = files[0];
+        filetype = file.type;
+        filename = file.name;
+
+        if (/^image\/\w+$/.test(filetype)) {
+          var blobURL = URL.createObjectURL(file);
+          $image.one('built.cropper', function () {
+            URL.revokeObjectURL(blobURL); // Revoke when load complete
+          }).cropper('reset', true).cropper('replace', blobURL);
+          $fileinput.val('');
+
+        } else {
+          alert('Please choose an image file.');
+        }
+      }
+    });
+  } else {
+    $fileinput.on('click',function(e){
+      e.preventDefault();
+      alert('The features required to make this work aren\'t supported in your browser :(. Try Chrome, maybe?');
+    });
+  }
+
+
+
+
+
 
 
 
@@ -59,35 +167,3 @@ $(function(){
 
 
 });
-
-
-
-//--- Add Linkedin to Social Likes ---//
-
-var socialLikesButtons = { // must be global because plugin requires it
-  linkedin: {
-    counterUrl: 'http://www.linkedin.com/countserv/count/share?url={url}',
-    counter: function(jsonUrl, deferred) {
-      'use strict';
-      var options = socialLikesButtons.linkedin;
-      if (!options._) {
-        options._ = {};
-        if (!window.IN) {
-          window.IN = {Tags: {}};
-        }
-        window.IN.Tags.Share = {
-          handleCount: function(params) {
-            var jsonUrl = options.counterUrl.replace(/{url}/g, encodeURIComponent(params.url));
-            options._[jsonUrl].resolve(params.count);
-          }
-        };
-      }
-      options._[jsonUrl] = deferred;
-      $.getScript(jsonUrl)
-      .fail(deferred.reject);
-    },
-    popupUrl: 'http://www.linkedin.com/shareArticle?mini=false&url={url}&title={title}',
-    popupWidth: 650,
-    popupHeight: 500
-  }
-};

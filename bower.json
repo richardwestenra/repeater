@@ -5,7 +5,8 @@
     "jquery": "~1.11.1",
     "modernizr": "~2.8.2",
     "respond": "~1.4.2",
-    "social-likes": "~3.0.4"
+    "social-likes": "~3.0.4",
+    "cropper": "~0.9.2"
   },
   "overrides": {
     "social-likes": {
