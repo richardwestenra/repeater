@@ -37,28 +37,41 @@ header {
 	}
 }
 .title {
-	margin: 0;
-	font-size: 1em;
 	float: left;
+	h1 {
+		margin: 0;
+		font-size: 1em;
+		display: inline-block;
+		vertical-align: middle;
+	}
 }
 
 .btn {
     display: inline-block;
     cursor: pointer;
-	margin: 0 2em;
 	font-weight: bold;
 	vertical-align: middle;
 	font-size: 0.9em;
 	color: #fff;
 	text-decoration: none;
-	// background: $c_link;
-	// color: $c_opposite;
-	// border-radius: 3px;
-	// padding: 0.5em 2em;
 	padding: 0.15em 0;
-	&:hover, &:focus {
-		box-shadow: 0 2px 0 rgba(#fff,0.5);
-		// text-decoration: underline;
+	margin: 0 0.6em;
+	span {
+		display: none;
+	}
+	@media (min-width: $m_smaller) {
+		margin: 0 1em;
+	}
+	@media (min-width: $m_small) {
+		&:hover, &:focus {
+			box-shadow: 0 2px 0 rgba(#fff,0.5);
+		}
+		span {
+			display: inline;
+		}
+	}
+	@media (min-width: $m_tablet) {
+		margin: 0 2em;
 	}
 }
 
@@ -112,7 +125,7 @@ header {
 		position: absolute;
 		bottom: 0;
 		right: 0;
-		z-index: 10;
+		z-index: 1;
 		width: 100%;
 		button {
 			border: none;
@@ -178,6 +191,76 @@ header {
 	i:before {
 		width: auto;
 		margin: 0;
+	}
+}
+
+.modal {
+	position: absolute;
+	left: 5%;
+	top: 5vh;
+	width: 90%;
+	transition: all ease .4s;
+	padding: 1em;
+	background: #f0f0f0;
+	box-shadow: 0 1px 5px rgba(#000,0.5), 0 0 0 3px rgba(white,0.5);
+	pointer-events: none;
+	transform: scale(0) translate3d(0,0,0);
+	opacity: 0;
+	z-index: 6;
+	@media (min-width: $m_tablet) {
+		width: 700px;
+		left: 50%;
+		top: 10vh;
+		margin-left: -370px;
+		padding: 2em;
+	}
+	.showModal & {
+		transform: scale(1) translate3d(0,0,0);
+		opacity: 1;
+		pointer-events: auto;
+	}
+	.closeModal {
+		position: absolute;
+		right: -0.5em;
+		top: -0.5em;
+		width: 1em;
+		height: 1em;
+		color: #fff;
+		text-decoration: none;
+		text-align: center;
+		line-height: 0.8em;
+		border-radius: 50%;
+		text-shadow: 0 1px 2px rgba(#000,0.2);
+		box-shadow: 0 1px 2px rgba(#000,0.2), 0 0 0 3px rgba(white,0.5);
+		font-weight: bold;
+		background: #333;
+		font-size: 2em;
+		transition: all ease .1s;
+		&:hover, &:focus {
+			background: #111;
+		}
+	}
+	*:first-child {
+		margin-top: 0;
+	}
+}
+.modalBg {
+	content: '';
+	pointer-events: none;
+	opacity: 0;
+	background: rgba(black,0.8);
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
+	transform: translate3d(0,0,0);
+	transition: all ease .4s;
+	cursor: pointer;
+	.showModal & {
+		opacity: 1;
+		pointer-events: auto;
 	}
 }
 

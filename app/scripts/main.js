@@ -106,6 +106,16 @@ $(function(){
     }
   });
 
+  // Add button to show/hide crop window for more screen real estate, if needed
+  $('#info').on('click',function(e){
+    e.preventDefault();
+    $('body').toggleClass('showModal');
+  });
+  $('.closeModal').on('click',function(e){
+    e.preventDefault();
+    $('body').removeClass('showModal');
+  });
+
 
 
   // Import/upload images

@@ -36,15 +36,16 @@
     <canvas id="canvas"></canvas>
 
     <header>
-      <h1 class="title"><i class="icon-grid"></i> Repeater</h1>
+      <div class="title">
+        <h1><i class="icon-grid"></i> <span>Repeater</span></h1>
+      </div>
       <nav>
         <a class="upload btn" href="#">
-          <span><i class="icon-upload"></i> Import</span>
+          <i class="icon-upload"></i> <span>Import</span>
           <input type="file" id="fileinput" />
         </a>
-        <a href="#" class="download btn" id="download" download target="_blank"><i class="icon-download"></i> Save</a>
-        <a href="#" class="info btn" id="info"><i class="icon-info"></i> About</a>
-        <a href="#" class="share btn" id="share"><i class="icon-share"></i> Share</a>
+        <a href="#" class="download btn" id="download" download target="_blank"><i class="icon-download"></i> <span>Save</span></a>
+        <a href="#" class="info btn" id="info"><i class="icon-info"></i> <span>About</span></a>
       </nav>
     </header>
 
@@ -68,20 +69,22 @@
       <img src="images/bg.jpg" alt="Damask" />
     </div>
 
+    <div class="modalBg closeModal"></div>
     <div id="about" class="about modal">
-      <h2>Repeater helps you crop repeating image tiles</h2>
+      <h2>Repeater helps you crop repeating image tiles.</h2>
+      <a href="#" class="closeModal">&times;</a>
       <p>The trickiest part of making a repeating tile from an image of a pattern is getting the edges to wrap nicely. Repeater helps with this by displaying the tiled result as you crop, so you can easily spot where to adjust the crop dimensions.</p>
       <p>Start a new project by uploading a PNG or JPEG image. Adjust the crop box until the pattern tiles nicely, then click Save to download the cropped image file.</p>
       <p>Made by <a href="http://richardwestenra.com">Richard Westenra</a>.</p>
     </div>
 
-<!-- 
+
     <div class="social social-likes social-likes_vertical social-likes_notext">
       <a class="facebook" href="#" title="Share link on Facebook">Facebook</a>
       <a class="twitter" href="#" data-via="RichardWestenra" data-title="Repeater makes cropping tiled background images easy" title="Share link on Twitter">Twitter</a>
       <a class="plusone" href="#" title="Share link on Google+">Google+</a>
     </div>
- -->
+
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
