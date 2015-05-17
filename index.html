@@ -6,7 +6,7 @@
     <meta name="description" content="nbed_metaDesc">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="styles/f4deec38.vendor.css">
-    <link rel="stylesheet" href="styles/94c63fbd.main.css">
+    <link rel="stylesheet" href="styles/0911cd67.main.css">
     <script src="scripts/vendor/fbe20327.modernizr.js"></script>
 
     <!--[if lt IE 9]>
@@ -16,57 +16,69 @@
     <meta name="twitter:site" content="RichardWestenra">
   </head>
   <body>
-    <!--[if lt IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <!--[if lt IE 10]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <noscript>
-      <p class="browsehappy">For full functionality of this site it is necessary to enable JavaScript. Here are <a href="http://www.enable-javascript.com/" target="_blank">instructions how to enable JavaScript in your web browser</a>.</p>
+      <p class="browsehappy">To make this work, you'll need to enable JavaScript. Here are <a href="http://www.enable-javascript.com/" target="_blank">instructions how to enable JavaScript in your web browser</a>.</p>
     </noscript>
 
     <canvas id="canvas"></canvas>
 
     <header>
-      <h1 class="title"><i class="icon-grid"></i> Repeater</h1>
+      <div class="title">
+        <h1><i class="icon-grid"></i> <span>Repeater</span></h1>
+      </div>
       <nav>
         <a class="upload btn" href="#">
-          <span><i class="icon-upload"></i> Import</span>
+          <i class="icon-upload"></i> <span>Import</span>
           <input type="file" id="fileinput">
         </a>
-        <a href="#" class="download btn" id="download" download target="_blank"><i class="icon-download"></i> Save</a>
-        <a href="#" class="about btn" id="about"><i class="icon-info-circled"></i> About</a>
-        <a href="#" class="share btn" id="share"><i class="icon-share"></i> Share</a>
+        <a href="#" class="download btn" id="download" download target="_blank"><i class="icon-download"></i> <span>Save</span></a>
+        <a href="#" class="info btn" id="info"><i class="icon-info"></i> <span>About</span></a>
       </nav>
     </header>
-<!-- 
-    <div class="canvasCrop">
-      <div class="formRow">x: <input type="number" id="sx" size="2" value="" /> 
-      y: <input type="number" id="sy" size="2" value="" /></div>
-      <div class="formRow">width: <input type="number" id="sw" size="2" value="" /> 
-      height: <input type="number" id="sh" size="2" value="" /></div>
-      <p id="cd"></p>
-      <p id="cbd"></p>
-      <p></p>
-    </div>
-  -->
 
+    <p id="values" class="values">
+      X: <span id="sx"></span>
+      Y: <span id="sy"></span>
+      Width: <span id="sw"></span>
+      Height: <span id="sh"></span>
+      Rotation: <span id="sr"></span>
+    </p>
+ 
     <div class="cropper">
-      <img src="images/6a4243d9.window.jpg" alt="Picture">
+      <button id="toggle" class="toggle"><i class="icon-left"></i></button>
+      <nav id="cropControls">
+        <button title="Zoom in" data-action="zoom" data-value="0.1"><i class="icon-zoom-in"></i></button>
+        <button title="Zoom out" data-action="zoom" data-value="-0.1"><i class="icon-zoom-out"></i></button>
+        <button title="Rotate anticlockwise" data-action="rotate" data-value="-0.1"><i class="icon-ccw"></i></button>
+        <button title="Rotate clockwise" data-action="rotate" data-value="0.1"><i class="icon-cw"></i></button>
+        <button title="Reset" data-action="reset"><i class="icon-reset"></i></button>
+      </nav>
+      <img src="images/7e90bee0.bg.jpg" alt="Damask">
     </div>
 
-<!-- 
-    <div class="social social-likes social-likes_vertical social-likes_notext" data-url="http://nbed_url/" data-title="Repeater | for all your tiled background image cropping needs">
-      <a class="facebook" href="#" title="Share link on Facebook">Facebook</a>
-      <a class="twitter" href="#" data-via="nbed_twitter" data-title="nbed_tweet" title="Share link on Twitter">Twitter</a>
-      <a class="plusone" href="#" title="Share link on Google+">Google+</a>
-      <a class="linkedin" href="#" title="Share link on LinkedIn">LinkedIn</a>
-      <a class="pinterest" href="#" title="Share image on Pinterest" data-media="http://nbed_url/social/og1200.png">Pinterest</a>
-      <a class="embedLink" href="#" title="Embed link on your website"><span class="social-likes__button">Embed</span></a>
+    <div class="modalBg closeModal"></div>
+    <div id="about" class="about modal">
+      <h2>Repeater helps you crop repeating image tiles.</h2>
+      <a href="#" class="closeModal">&times;</a>
+      <p>The trickiest part of making a repeating tile from an image of a pattern is getting the edges to wrap nicely. Repeater helps with this by displaying the tiled result as you crop, so you can easily spot where to adjust the crop dimensions.</p>
+      <p>Start a new project by uploading a PNG or JPEG image. Adjust the crop box until the pattern tiles nicely, then click Save to download the cropped image file.</p>
+      <p>Made by <a href="http://richardwestenra.com">Richard Westenra</a>.</p>
     </div>
- -->
+
+
+    <div class="social social-likes social-likes_vertical social-likes_notext">
+      <a class="facebook" href="#" title="Share link on Facebook">Facebook</a>
+      <a class="twitter" href="#" data-via="RichardWestenra" data-title="Repeater makes cropping tiled background images easy" title="Share link on Twitter">Twitter</a>
+      <a class="plusone" href="#" title="Share link on Google+">Google+</a>
+    </div>
+
 
     <script src="scripts/637e94ec.vendor.js"></script>
 
-    <script src="scripts/4c32d9b0.main.js"></script>
+    <script src="scripts/88a4bf9b.main.js"></script>
 
     <!-- NBED: Google Analytics: change UA-XXXXX-X to be your site's ID.
     <script>
