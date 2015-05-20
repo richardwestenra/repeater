@@ -96,7 +96,7 @@ header {
 	bottom: 0;
 	left: 0;
 	margin: 0;
-	background: rgba(black,0.7);
+	background: rgba(black,0.6);
 	color: white;
 	padding: 0.4em 0 0.2em 1.5em;
 	font-size: 0.9em;
@@ -105,11 +105,11 @@ header {
 	text-shadow: 0 1px 2px black;
 	&:hover {
 		background: #111;
-		font-size: 1em;
-		padding: 0.6em 0 0.3em 2em;
 	}
 	span {
-		margin-right: 1.5em;
+		font-weight: bold;
+		margin-left: 0.3em;
+		margin-right: 1.6em;
 	}
 }
 
@@ -228,16 +228,17 @@ header {
 		color: #fff;
 		text-decoration: none;
 		text-align: center;
-		line-height: 0.8em;
+		line-height: 0.9em;
 		border-radius: 50%;
 		text-shadow: 0 1px 2px rgba(#000,0.2);
-		box-shadow: 0 1px 2px rgba(#000,0.2), 0 0 0 3px rgba(white,0.5);
+		box-shadow: 0 1px 2px rgba(#000,0.2), 0 0 0 3px rgba(white,0.6);
 		font-weight: bold;
 		background: #333;
 		font-size: 2em;
 		transition: all ease .1s;
 		&:hover, &:focus {
 			background: #111;
+			box-shadow: 0 1px 2px rgba(#000,0.2), 0 0 0 3px rgba(white,0.9);
 		}
 	}
 	*:first-child {
